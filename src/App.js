@@ -1,10 +1,35 @@
 import "./App.css";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import Home from "./Components/Home/Home";
+import Details from "./Components/Details/Details";
+import SearchPage from "./Components/Search/SearchPage";
+import { useState } from "react";
 
 function App() {
+  const [text, setText] = useState("");
+  const [isbn, setISBN] = useState("");
+
   return (
-    <div className="App">
-      <h1>Initial setup</h1>
-    </div>
+    <>
+      <div id="topContainer">
+        <Router>
+          <Routes>
+            <Route
+              path="/"
+              exact
+              element={<Home text={text} setText={setText} />}
+            />
+            <Route
+              path="/search"
+              element={
+                <SearchPage text={text} setText={setText} setISBN={setISBN} />
+              }
+            />
+            <Route path="/details" element={<Details isbn={isbn} />} />
+          </Routes>
+        </Router>
+      </div>
+    </>
   );
 }
 
